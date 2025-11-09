@@ -35,8 +35,8 @@ export default function App(){
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="w-full max-w-4xl">
+    <div className="min-h-screen flex items-center justify-center p-4 md:p-6 bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="w-full max-w-5xl">
         {!user && view==='login' && <Login onLogin={handleLogin} goRegister={()=>setView('register')} />}
         {!user && view==='register' && <Register goLogin={()=>setView('login')} />}
         {user && <Dashboard username={user.username} onLogout={handleLogout} user={user} />}
