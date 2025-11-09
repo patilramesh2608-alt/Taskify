@@ -1,5 +1,9 @@
 // ...existing code...
+<<<<<<< HEAD
 import React, {useEffect, useState, useMemo, useRef} from 'react'
+=======
+import React, {useEffect, useState, useMemo} from 'react'
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
 import { createApi } from '../api'
 import TaskForm from '../components/TaskForm'
 import TaskList from '../components/TaskList'
@@ -12,6 +16,7 @@ export default function Dashboard({username, onLogout, user}){
   const [error, setError] = useState(null)
   const [addingTask, setAddingTask] = useState(false)
   const [showForm, setShowForm] = useState(false)
+<<<<<<< HEAD
 
   // Dark mode state (persisted)
   const [darkMode, setDarkMode] = useState(() => {
@@ -24,6 +29,8 @@ export default function Dashboard({username, onLogout, user}){
     }
   })
 
+=======
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
   const api = useMemo(() => createApi(username), [username])
 
   // Toasts state
@@ -97,7 +104,10 @@ export default function Dashboard({username, onLogout, user}){
         setTasks(prev=>[...prev, res.data])
         setError(null)
         setShowForm(false) // collapse form after successful add
+<<<<<<< HEAD
         addToast('success','Task added ✓')
+=======
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
       }
     } catch (err) {
       let errorMsg = 'Failed to add task'
@@ -171,6 +181,7 @@ export default function Dashboard({username, onLogout, user}){
       <path d="M13 19H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   )
+<<<<<<< HEAD
 
   const SunIcon = ({className="w-4 h-4"}) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -223,6 +234,14 @@ export default function Dashboard({username, onLogout, user}){
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gradient-to-r from-sky-50 via-white to-indigo-50 p-4 rounded-xl shadow-sm dark:from-slate-800 dark:via-slate-900 dark:to-indigo-900">
         <div className="flex items-center gap-4">
           <h1 className="text-3xl font-extrabold text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-sky-500">
+=======
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gradient-to-r from-sky-50 via-white to-indigo-50 p-4 rounded-xl shadow-sm">
+        <div className="flex items-center gap-4">
+          <h1 className="text-3xl font-extrabold text-slate-800 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-sky-500">
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
             Taskify
           </h1>
           {/* removed Beta badge as requested */}
@@ -230,12 +249,20 @@ export default function Dashboard({username, onLogout, user}){
 
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-3 pr-2">
+<<<<<<< HEAD
             <span className="hidden sm:inline text-sm text-slate-600 dark:text-slate-300">Signed in as</span>
+=======
+            <span className="hidden sm:inline text-sm text-slate-600">Signed in as</span>
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
             <div className="flex items-center gap-2">
               <div className="w-9 h-9 bg-gradient-to-br from-indigo-600 to-pink-500 rounded-full flex items-center justify-center text-sm font-semibold text-white shadow-md">
                 {user?.username?.[0]?.toUpperCase() || 'U'}
               </div>
+<<<<<<< HEAD
               <div className="text-sm text-slate-700 font-medium hidden sm:block dark:text-slate-200">{user?.username}</div>
+=======
+              <div className="text-sm text-slate-700 font-medium hidden sm:block">{user?.username}</div>
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
             </div>
           </div>
 
@@ -252,6 +279,7 @@ export default function Dashboard({username, onLogout, user}){
               {addingTask && <svg className="w-4 h-4 animate-spin ml-1" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.25"/></svg>}
             </button>
 
+<<<<<<< HEAD
             {/* Dark mode toggle */}
             <button
               onClick={() => setDarkMode(d=>!d)}
@@ -266,6 +294,12 @@ export default function Dashboard({username, onLogout, user}){
             <button
               onClick={onLogout}
               className="inline-flex items-center gap-2 px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-700 bg-white hover:bg-slate-50 transition shadow-sm hover:shadow-md dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700"
+=======
+            
+            <button
+              onClick={onLogout}
+              className="inline-flex items-center gap-2 px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-700 bg-white hover:bg-slate-50 transition shadow-sm hover:shadow-md"
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
               aria-label="Logout"
               title="Logout"
             >
@@ -278,6 +312,7 @@ export default function Dashboard({username, onLogout, user}){
 
       {/* colorful summary cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+<<<<<<< HEAD
         <div className="col-span-1 rounded-xl p-5 shadow-md transform transition-all duration-300 hover:shadow-2xl hover:scale-105 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100 dark:from-slate-700 dark:to-slate-800 dark:border-slate-700">
           <div className="flex items-center justify-between">
             <div>
@@ -310,12 +345,51 @@ export default function Dashboard({username, onLogout, user}){
             <div className="px-3 py-2 rounded-lg bg-red-100 text-red-800 text-sm font-medium dark:bg-red-900/20 dark:text-red-300">High: {byPriority.high}</div>
             <div className="px-3 py-2 rounded-lg bg-yellow-100 text-yellow-800 text-sm font-medium dark:bg-yellow-900/20 dark:text-yellow-300">Medium: {byPriority.medium}</div>
             <div className="px-3 py-2 rounded-lg bg-green-100 text-green-800 text-sm font-medium dark:bg-green-900/20 dark:text-green-300">Low: {byPriority.low}</div>
+=======
+        <div className="col-span-1 rounded-xl p-5 shadow-md transform transition-all duration-300 hover:shadow-2xl hover:scale-105 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-sm font-semibold text-blue-800">Total tasks</div>
+              <div className="mt-2 text-3xl font-bold text-blue-900">{total}</div>
+            </div>
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/70 text-blue-800 shadow-sm">
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </div>
+          </div>
+          <div className="mt-3 text-xs text-blue-700/80">Summary of all tasks</div>
+        </div>
+
+        <div className="col-span-1 rounded-xl p-5 shadow-md transform transition-all duration-300 hover:shadow-2xl hover:scale-105 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-100">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-sm font-semibold text-orange-800">Completed</div>
+              <div className="mt-2 text-3xl font-bold text-orange-900">{completed}</div>
+            </div>
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/70 text-orange-800 shadow-sm">
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </div>
+          </div>
+          <div className="mt-3 text-xs text-orange-700/80">Tasks completed so far</div>
+        </div>
+
+        <div className="col-span-1 rounded-xl p-5 shadow-md transform transition-all duration-300 hover:shadow-2xl hover:scale-105 bg-gradient-to-r from-emerald-50 to-emerald-100 border border-emerald-100">
+          <div className="font-semibold mb-3 text-emerald-800">By priority</div>
+          <div className="flex gap-2 flex-wrap">
+            <div className="px-3 py-2 rounded-lg bg-red-100 text-red-800 text-sm font-medium">High: {byPriority.high}</div>
+            <div className="px-3 py-2 rounded-lg bg-yellow-100 text-yellow-800 text-sm font-medium">Medium: {byPriority.medium}</div>
+            <div className="px-3 py-2 rounded-lg bg-green-100 text-green-800 text-sm font-medium">Low: {byPriority.low}</div>
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
           </div>
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className="bg-gradient-to-r from-white to-slate-50 p-6 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-105 border border-slate-100 dark:from-slate-900 dark:to-slate-850 dark:border-slate-700">
         {error && <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm dark:bg-red-900/20 dark:text-red-300">{error}</div>}
+=======
+      <div className="bg-gradient-to-r from-white to-slate-50 p-6 rounded-xl shadow-md transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-105 border border-slate-100">
+        {error && <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm">{error}</div>}
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
 
         <div id="task-form" className={`mb-4 transition-all ${showForm ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
           {/* keep TaskForm usage but hide/show */}
@@ -324,12 +398,18 @@ export default function Dashboard({username, onLogout, user}){
 
         {!showForm && (
           <div className="mb-4 flex items-center justify-between">
+<<<<<<< HEAD
             <div className="text-sm text-slate-600 dark:text-slate-300">Quick actions</div>
             <div className="text-xs text-slate-500 dark:text-slate-400">Tip: Click "Add Task" to create a task</div>
+=======
+            <div className="text-sm text-slate-600">Quick actions</div>
+            <div className="text-xs text-slate-500">Tip: Click "Add Task" to create a task</div>
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
           </div>
         )}
 
         {loading ? (
+<<<<<<< HEAD
           <div className="p-6 text-center text-slate-500 dark:text-slate-400">Loading tasks…</div>
         ) : (
           <>
@@ -393,6 +473,17 @@ export default function Dashboard({username, onLogout, user}){
                   </div>
                 ))}
               </div>
+=======
+          <div className="p-6 text-center text-slate-500">Loading tasks…</div>
+        ) : (
+          <>
+            {tasks.length === 0 ? (
+              <div className="p-6 text-center text-slate-500">
+                No tasks yet. <button onClick={() => setShowForm(true)} className="ml-2 text-sky-600 font-medium hover:underline">Create your first task</button>
+              </div>
+            ) : (
+              <TaskList tasks={tasks} onToggle={t=> updateTask(t.id, {completed: !t.completed})} onDelete={deleteTask} />
+>>>>>>> 32afdae (Enhance dashboard UI: add hover gradients to cards and style buttons.)
             )}
           </>
         )}
