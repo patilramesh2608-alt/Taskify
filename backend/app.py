@@ -1,3 +1,18 @@
+import pkgutil
+import importlib.util
+
+# Compatibility shim: Python 3.14 removed pkgutil.get_loader; provide a minimal replacement
+# so older libraries (Flask/scaffold) that call pkgutil.get_loader still work.
+if not hasattr(pkgutil, "get_loader"):
+    def _compat_get_loader(name):
+        # importlib.util.find_spec raises ValueError for '__main__' in some run modes
+        if name == '__main__':
+            return None
+        spec = importlib.util.find_spec(name)
+        return spec.loader if spec is not None else None
+
+    pkgutil.get_loader = _compat_get_loader
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from models import init_db, get_session, User, Task
@@ -186,6 +201,13 @@ def create_task():
         if not is_valid:
             return jsonify({'error': result}), 400
         due_date = result
+        # parse into DateTime for canonical storage (store at midnight UTC-local)
+        due_date_dt = None
+        if due_date:
+            try:
+                due_date_dt = datetime.strptime(due_date, '%Y-%m-%d')
+            except Exception:
+                due_date_dt = None
         
         # Validate category
         category = data.get('category')
@@ -195,7 +217,7 @@ def create_task():
         category = result
         
         with get_session() as s:
-            t = Task(title=title, completed=False, priority=priority, due_date=due_date, category=category, owner_id=user.id)
+            t = Task(title=title, completed=False, priority=priority, due_date=due_date, due_date_dt=due_date_dt, category=category, owner_id=user.id)
             s.add(t)
             s.commit()
             return jsonify(t.to_dict()), 201
@@ -249,6 +271,14 @@ def update_task(task_id):
             if not is_valid:
                 return jsonify({'error': result}), 400
             t.due_date = result
+            # also update parsed DateTime column if available
+            if result:
+                try:
+                    t.due_date_dt = datetime.strptime(result, '%Y-%m-%d')
+                except Exception:
+                    t.due_date_dt = None
+            else:
+                t.due_date_dt = None
         
         # Validate and update category if provided
         if 'category' in data:
